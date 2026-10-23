@@ -89,7 +89,16 @@ def load_cohort_matrix():
 
 
 # Load primary data — hard stop if not present
+try:
+    df = load_telco()
+except FileNotFoundError:
+    st.error(
+        "**`telco_clean.csv` not found.**  \n"
+        "Place it in `data/processed/` and redeploy."
+    )
+    st.stop()
 
+scored_df = load_scored()
 
 
 # ── Sidebar ─────────────────────────────────────────────────────────────────────
