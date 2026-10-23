@@ -124,10 +124,4 @@ streamlit run app_4.py
 
 ---
 
-## Key Interview Talking Points
 
-- **Why two datasets?** The Telco dataset provides subscriber-level churn labels for the predictive model. The Online Retail dataset provides a transaction history needed to reconstruct cohort retention and MRR movement — skills that require time-series thinking rather than cross-sectional analysis.
-- **How did you handle class imbalance?** `scale_pos_weight = n_negative / n_positive` in XGBoost. This reweights the loss function so the model penalises missing a churner more heavily than incorrectly flagging a non-churner — without duplicating data (SMOTE) or discarding majority-class samples.
-- **Why AUC-ROC over accuracy?** With 74% non-churners, a model predicting "no churn" for every subscriber would be 74% accurate but completely useless. AUC-ROC measures rank-ordering ability across all thresholds and is robust to class imbalance.
-- **What does SHAP add beyond feature importance?** Standard feature importance tells you which features the model used most across all predictions. SHAP quantifies the direction and magnitude of each feature's contribution to each individual prediction — so you can tell a stakeholder not just "contract type is important" but "this specific subscriber is high-risk primarily because they are month-to-month AND on fibre optic AND use electronic check."
-- **What is predictive LTV?** Derived from the geometric series of monthly payments: `LTV = ARPU / Churn Rate`. This assumes a constant monthly churn probability — the same assumption underlying a geometric distribution. It gives the expected total revenue from a subscriber before they cancel.
